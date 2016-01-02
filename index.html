@@ -1,0 +1,2101 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
+        <title>Switch States</title>
+        <script src="js/jquery-1.11.2/jquery-1.11.2.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+        <script src="jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+        <link rel="stylesheet" href="jvectormap/jquery-jvectormap-2.0.2.css" />
+        <script src="jvectormap/jquery-jvectormap-us-lcc-en.js"></script>
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+                <script>
+            $( document ).on( "pagebeforechange" , function(e, data) {
+                      if(typeof map.series !== "undefined") {
+                        map.series.regions[0].setValues(generateColors());
+                    }
+  });
+        </script>
+
+        <div data-role="page" id="page-main">
+            <script>
+
+                var states = {
+                    "US-AL": {
+                        economy: 4,
+                        attractiveness: 2,
+                        mobility: 3,
+                        laws: 5,
+                        family: 6,
+                        name: "Alabama",
+                        capital: "Montgomery",
+                        population: 4849377,
+                        sqmiles: 52419.00,
+                        marriage_rate: 9.8,
+                        divorce: 5.4,
+                        unemployment: 5.7,
+                        avg_temp: 65,
+                        high_temp: 76.5,
+                        low_temp: 53.5,
+                        precipitation: 53.05,
+                        obesity: 1,
+                        gdp: 199727,
+                        gini: 0.472,
+                        age_of_consent: 16,
+                        median_age: 37.9,
+                        growth_rate: 1.46,
+                        urban: 59.00,
+                    }, "US-AK": {
+                        economy: 5,
+                        attractiveness: 6,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Alaska",
+                        capital: "Juneau",
+                        population: 736732,
+                        sqmiles: 663267.00,
+                        marriage_rate: 8.3,
+                        divorce: 4.6,
+                        unemployment: 6.5,
+                        avg_temp: 37,
+                        high_temp: 43.7,
+                        low_temp: 30.3,
+                        precipitation: 16.57,
+                        obesity: 2,
+                        gdp: 60542,
+                        gini: 0.422,
+                        age_of_consent: 16,
+                        median_age: 33.8,
+                        growth_rate: 3.73,
+                        urban: 66.00,
+                    }, "US-AZ": {
+                        economy: 3,
+                        attractiveness: 7,
+                        mobility: 5,
+                        laws: 3,
+                        family: 4,
+                        name: "Arizona",
+                        capital: "Phoenix",
+                        population: 6731484,
+                        sqmiles: 113998.00,
+                        marriage_rate: 6.6,
+                        divorce: 4.7,
+                        unemployment: 6.2,
+                        avg_temp: 75.05,
+                        high_temp: 86.7,
+                        low_temp: 63.4,
+                        precipitation: 8.04,
+                        obesity: 9,
+                        gdp: 288924,
+                        gini: 0.455,
+                        age_of_consent: 18,
+                        median_age: 35.9,
+                        growth_rate: 5.31,
+                        urban: 89.80,
+                    }, "US-AR": {
+                        economy: 5,
+                        attractiveness: 1,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Arkansas",
+                        capital: "Little Rock",
+                        population: 2966369,
+                        sqmiles: 53179.00,
+                        marriage_rate: 14.3,
+                        divorce: 6.2,
+                        unemployment: 5.6,
+                        avg_temp: 62.65,
+                        high_temp: 72.8,
+                        low_temp: 52.5,
+                        precipitation: 49.57,
+                        obesity: 2,
+                        gdp: 129745,
+                        gini: 0.458,
+                        age_of_consent: 16,
+                        median_age: 37.4,
+                        growth_rate: 1.73,
+                        urban: 56.20,
+                    }, "US-CA": {
+                        economy: 2,
+                        attractiveness: 10,
+                        mobility: 5,
+                        laws: 2,
+                        family: 3,
+                        name: "California",
+                        capital: "Sacramento",
+                        population: 38802500,
+                        sqmiles: 163696.00,
+                        marriage_rate: 6.2,
+                        divorce: 4.3,
+                        unemployment: 6.5,
+                        avg_temp: 60.95,
+                        high_temp: 73.6,
+                        low_temp: 48.3,
+                        precipitation: 18.51,
+                        obesity: 9,
+                        gdp: 2287021,
+                        gini: 0.471,
+                        age_of_consent: 18,
+                        median_age: 35.2,
+                        growth_rate: 4.16,
+                        urban: 95.00,
+                    }, "US-CO": {
+                        economy: 8,
+                        attractiveness: 10,
+                        mobility: 5,
+                        laws: 2,
+                        family: 3,
+                        name: "Colorado",
+                        capital: "Denver",
+                        population: 5355866,
+                        sqmiles: 104094.00,
+                        marriage_rate: 7.9,
+                        divorce: 4.7,
+                        unemployment: 4.2,
+                        avg_temp: 50.7,
+                        high_temp: 65,
+                        low_temp: 36.4,
+                        precipitation: 14.16,
+                        obesity: 10,
+                        gdp: 309721,
+                        gini: 0.457,
+                        age_of_consent: 17,
+                        median_age: 36.1,
+                        growth_rate: 6.5,
+                        urban: 86.20,
+                    }, "US-CT": {
+                        economy: 2,
+                        attractiveness: 9,
+                        mobility: 7,
+                        laws: 5,
+                        family: 6,
+                        name: "Conneticut",
+                        capital: "Hartford",
+                        population: 3596677,
+                        sqmiles: 5543.00,
+                        marriage_rate: 5.7,
+                        divorce: 3.3,
+                        unemployment: 6.4,
+                        avg_temp: 52.35,
+                        high_temp: 60.2,
+                        low_temp: 44.5,
+                        precipitation: 42.8,
+                        obesity: 9,
+                        gdp: 258996,
+                        gini: 0.486,
+                        age_of_consent: 16,
+                        median_age: 40,
+                        growth_rate: 0.63,
+                        urban: 88.00,
+                    }, "US-DE": {
+                        economy: 7,
+                        attractiveness: 3,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "Delaware",
+                        capital: "Dover",
+                        population: 935614,
+                        sqmiles: 2489.00,
+                        marriage_rate: 6.4,
+                        divorce: 3.5,
+                        unemployment: 4.6,
+                        avg_temp: 56.75,
+                        high_temp: 66.2,
+                        low_temp: 47.3,
+                        precipitation: 46.1,
+                        obesity: 5,
+                        gdp: 65029,
+                        gini: 0.44,
+                        age_of_consent: 16,
+                        median_age: 38.8,
+                        growth_rate: 4.2,
+                        urban: 83.30,
+                    }, "US-DC": {
+                        economy: 1,
+                        attractiveness: 10,
+                        mobility: 5,
+                        laws: 4,
+                        family: 5,
+                        name: "District of Columbia",
+                        capital: "Washington",
+                        population: 658893,
+                        sqmiles: 68.30,
+                        marriage_rate: 5.1,
+                        divorce: 2.4,
+                        unemployment: 7.7,
+                        avg_temp: 55.7,
+                        high_temp: 64.8,
+                        low_temp: 46.6,
+                        precipitation: 40.78,
+                        obesity: 10,
+                        gdp: 105465,
+                        gini: 0.532,
+                        age_of_consent: 18,
+                        median_age: 33.8,
+                        growth_rate: 9.5,
+                        urban: 100.00,
+                    }, "US-FL": {
+                        economy: 4,
+                        attractiveness: 8,
+                        mobility: 3,
+                        laws: 5,
+                        family: 6,
+                        name: "Florida",
+                        capital: "Tallahassee",
+                        population: 19893297,
+                        sqmiles: 65755.00,
+                        marriage_rate: 9.4,
+                        divorce: 5.1,
+                        unemployment: 5.7,
+                        avg_temp: 67.6,
+                        high_temp: 79.5,
+                        low_temp: 55.7,
+                        precipitation: 59.21,
+                        obesity: 8,
+                        gdp: 833511,
+                        gini: 0.474,
+                        age_of_consent: 18,
+                        median_age: 40.7,
+                        growth_rate: 5.81,
+                        urban: 91.20,
+                    }, "US-GA": {
+                        economy: 3,
+                        attractiveness: 4,
+                        mobility: 5,
+                        laws: 6,
+                        family: 6,
+                        name: "Georgia",
+                        capital: "Atlanta",
+                        population: 10097343,
+                        sqmiles: 59425.00,
+                        marriage_rate: 6.5,
+                        divorce: 2.5,
+                        unemployment: 6.3,
+                        avg_temp: 62.55,
+                        high_temp: 71.9,
+                        low_temp: 53.2,
+                        precipitation: 49.74,
+                        obesity: 3,
+                        gdp: 472423,
+                        gini: 0.468,
+                        age_of_consent: 16,
+                        median_age: 35.3,
+                        growth_rate: 4.23,
+                        urban: 75.10,
+                    }, "US-HI": {
+                        economy: 8,
+                        attractiveness: 10,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Hawaii",
+                        capital: "Honolulu",
+                        population: 1419561,
+                        sqmiles: 10931.00,
+                        marriage_rate: 20.7,
+                        divorce: 3.7,
+                        unemployment: 4.1,
+                        avg_temp: 77.6,
+                        high_temp: 84.5,
+                        low_temp: 70.7,
+                        precipitation: 17.13,
+                        obesity: 10,
+                        gdp: 78110,
+                        gini: 0.433,
+                        age_of_consent: 16,
+                        median_age: 38.6,
+                        growth_rate: 4.36,
+                        urban: 91.90,
+                    }, "US-ID": {
+                        economy: 9,
+                        attractiveness: 5,
+                        mobility: 5,
+                        laws: 4,
+                        family: 3,
+                        name: "Idaho",
+                        capital: "Boise",
+                        population: 1634464,
+                        sqmiles: 83570.00,
+                        marriage_rate: 10.9,
+                        divorce: 5.3,
+                        unemployment: 3.8,
+                        avg_temp: 52.5,
+                        high_temp: 63.7,
+                        low_temp: 41.3,
+                        precipitation: 11.58,
+                        obesity: 6,
+                        gdp: 66548,
+                        gini: 0.433,
+                        age_of_consent: 18,
+                        median_age: 34.6,
+                        growth_rate: 4.27,
+                        urban: 70.60,
+                    }, "US-IL": {
+                        economy: 3,
+                        attractiveness: 6,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Illinois",
+                        capital: "Springfield",
+                        population: 12880580,
+                        sqmiles: 57914.00,
+                        marriage_rate: 6.6,
+                        divorce: 2.9,
+                        unemployment: 6,
+                        avg_temp: 51.3,
+                        high_temp: 59.3,
+                        low_temp: 43.3,
+                        precipitation: 39.04,
+                        obesity: 6,
+                        gdp: 742407,
+                        gini: 0.465,
+                        age_of_consent: 17,
+                        median_age: 36.6,
+                        growth_rate: 0.39,
+                        urban: 88.50,
+                    }, "US-IN": {
+                        economy: 4,
+                        attractiveness: 2,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Indiana",
+                        capital: "Indianapolis",
+                        population: 6596855,
+                        sqmiles: 36418.00,
+                        marriage_rate: 7.8,
+                        divorce: 0,
+                        unemployment: 5.8,
+                        avg_temp: 51.7,
+                        high_temp: 62.1,
+                        low_temp: 41.3,
+                        precipitation: 40.62,
+                        obesity: 4,
+                        gdp: 328212,
+                        gini: 0.44,
+                        age_of_consent: 16,
+                        median_age: 37,
+                        growth_rate: 1.74,
+                        urban: 72.40,
+                    }, "US-IA": {
+                        economy: 8,
+                        attractiveness: 3,
+                        mobility: 5,
+                        laws: 4,
+                        family: 5,
+                        name: "Iowa",
+                        capital: "Des Moines",
+                        population: 3107126,
+                        sqmiles: 56272.00,
+                        marriage_rate: 6.9,
+                        divorce: 3.1,
+                        unemployment: 4,
+                        avg_temp: 50.85,
+                        high_temp: 60.3,
+                        low_temp: 41.4,
+                        precipitation: 35.67,
+                        obesity: 5,
+                        gdp: 174512,
+                        gini: 0.427,
+                        age_of_consent: 16,
+                        median_age: 38.1,
+                        growth_rate: 1.99,
+                        urban: 64.00,
+                    }, "US-KS": {
+                        economy: 8,
+                        attractiveness: 4,
+                        mobility: 5,
+                        laws: 4,
+                        family: 4,
+                        name: "Kansas",
+                        capital: "Topeka",
+                        population: 2904021,
+                        sqmiles: 82277.00,
+                        marriage_rate: 7.3,
+                        divorce: 3.6,
+                        unemployment: 4.2,
+                        avg_temp: 55.05,
+                        high_temp: 66,
+                        low_temp: 44.1,
+                        precipitation: 36.49,
+                        obesity: 5,
+                        gdp: 149153,
+                        gini: 0.445,
+                        age_of_consent: 16,
+                        median_age: 36,
+                        growth_rate: 1.78,
+                        urban: 74.20,
+                    }, "US-KY": {
+                        economy: 6,
+                        attractiveness: 2,
+                        mobility: 3,
+                        laws: 5,
+                        family: 5,
+                        name: "Kentucky",
+                        capital: "Frankfort",
+                        population: 4413457,
+                        sqmiles: 40409.00,
+                        marriage_rate: 9,
+                        divorce: 5.2,
+                        unemployment: 5.1,
+                        avg_temp: 53.65,
+                        high_temp: 65.3,
+                        low_temp: 42,
+                        precipitation: 43.59,
+                        obesity: 1,
+                        gdp: 189667,
+                        gini: 0.466,
+                        age_of_consent: 16,
+                        median_age: 38.1,
+                        growth_rate: 1.71,
+                        urban: 58.40,
+                    }, "US-LA": {
+                        economy: 1,
+                        attractiveness: 2,
+                        mobility: 1,
+                        laws: 4,
+                        family: 5,
+                        name: "Lousiana",
+                        capital: "Baton Rouge",
+                        population: 4649676,
+                        sqmiles: 51840.00,
+                        marriage_rate: 8.2,
+                        divorce: 0,
+                        unemployment: 6.6,
+                        avg_temp: 69.55,
+                        high_temp: 78,
+                        low_temp: 61.1,
+                        precipitation: 62.45,
+                        obesity: 2,
+                        gdp: 257008,
+                        gini: 0.475,
+                        age_of_consent: 17,
+                        median_age: 35.8,
+                        growth_rate: 2.57,
+                        urban: 73.20,
+                    }, "US-ME": {
+                        economy: 7,
+                        attractiveness: 6,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Maine",
+                        capital: "Augusta",
+                        population: 1330089,
+                        sqmiles: 35385.00,
+                        marriage_rate: 8.4,
+                        divorce: 4.6,
+                        unemployment: 4.8,
+                        avg_temp: 45.65,
+                        high_temp: 54.5,
+                        low_temp: 36.8,
+                        precipitation: 41.9,
+                        obesity: 7,
+                        gdp: 56163,
+                        gini: 0.437,
+                        age_of_consent: 16,
+                        median_age: 42.7,
+                        growth_rate: 0.13,
+                        urban: 38.70,
+                    }, "US-MD": {
+                        economy: 5,
+                        attractiveness: 6,
+                        mobility: 10,
+                        laws: 5,
+                        family: 6,
+                        name: "Maryland",
+                        capital: "Annapolis",
+                        population: 5976407,
+                        sqmiles: 12407.00,
+                        marriage_rate: 7.1,
+                        divorce: 3.4,
+                        unemployment: 5.4,
+                        avg_temp: 58.45,
+                        high_temp: 66.3,
+                        low_temp: 50.6,
+                        precipitation: 40.72,
+                        obesity: 6,
+                        gdp: 351234,
+                        gini: 0.443,
+                        age_of_consent: 16,
+                        median_age: 38,
+                        growth_rate: 3.51,
+                        urban: 87.20,
+                    }, "US-MA": {
+                        economy: 7,
+                        attractiveness: 10,
+                        mobility: 7,
+                        laws: 4,
+                        family: 4,
+                        name: "Massachusetts",
+                        capital: "Boston",
+                        population: 6745408,
+                        sqmiles: 10555.00,
+                        marriage_rate: 5.9,
+                        divorce: 2.5,
+                        unemployment: 4.8,
+                        avg_temp: 51.4,
+                        high_temp: 58.7,
+                        low_temp: 44.1,
+                        precipitation: 43.56,
+                        obesity: 10,
+                        gdp: 462748,
+                        gini: 0.475,
+                        age_of_consent: 16,
+                        median_age: 39.1,
+                        growth_rate: 3.02,
+                        urban: 92.00,
+                    }, "US-MI": {
+                        economy: 5,
+                        attractiveness: 3,
+                        mobility: 7,
+                        laws: 5,
+                        family: 7,
+                        name: "Michigan",
+                        capital: "Lansing",
+                        population: 9909877,
+                        sqmiles: 96716.00,
+                        marriage_rate: 6.5,
+                        divorce: 3.8,
+                        unemployment: 5.6,
+                        avg_temp: 48.2,
+                        high_temp: 57.3,
+                        low_temp: 39.1,
+                        precipitation: 31.73,
+                        obesity: 3,
+                        gdp: 449218,
+                        gini: 0.451,
+                        age_of_consent: 16,
+                        median_age: 38.9,
+                        growth_rate: 0.27,
+                        urban: 74.60,
+                    }, "US-MN": {
+                        economy: 1,
+                        attractiveness: 9,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Minnesota",
+                        capital: "Saint Paul",
+                        population: 5457173,
+                        sqmiles: 86939.00,
+                        marriage_rate: 6.5,
+                        divorce: 3.1,
+                        unemployment: 3.7,
+                        avg_temp: 47.05,
+                        high_temp: 56.6,
+                        low_temp: 37.5,
+                        precipitation: 32.04,
+                        obesity: 6,
+                        gdp: 326125,
+                        gini: 0.44,
+                        age_of_consent: 16,
+                        median_age: 37.4,
+                        growth_rate: 2.89,
+                        urban: 73.30,
+                    }, "US-MS": {
+                        economy: 1,
+                        attractiveness: 1,
+                        mobility: 3,
+                        laws: 5,
+                        family: 6,
+                        name: "Mississppi",
+                        capital: "Jackson",
+                        population: 2994079,
+                        sqmiles: 48430.00,
+                        marriage_rate: 6.4,
+                        divorce: 4.9,
+                        unemployment: 6.8,
+                        avg_temp: 64.55,
+                        high_temp: 75.5,
+                        low_temp: 53.6,
+                        precipitation: 54.16,
+                        obesity: 1,
+                        gdp: 109179,
+                        gini: 0.468,
+                        age_of_consent: 16,
+                        median_age: 36,
+                        growth_rate: 0.9,
+                        urban: 49.30,
+                    }, "US-MO": {
+                        economy: 5,
+                        attractiveness: 4,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Missouri",
+                        capital: "Jefferson City",
+                        population: 6063589,
+                        sqmiles: 69704.00,
+                        marriage_rate: 7.3,
+                        divorce: 4,
+                        unemployment: 5.6,
+                        avg_temp: 55.25,
+                        high_temp: 65.8,
+                        low_temp: 44.7,
+                        precipitation: 43.11,
+                        obesity: 3,
+                        gdp: 285135,
+                        gini: 0.455,
+                        age_of_consent: 17,
+                        median_age: 37.9,
+                        growth_rate: 1.25,
+                        urban: 70.40,
+                    }, "US-MT": {
+                        economy: 8,
+                        attractiveness: 10,
+                        mobility: 5,
+                        laws: 4,
+                        family: 4,
+                        name: "Montana",
+                        capital: "Helena",
+                        population: 1023579,
+                        sqmiles: 147042.00,
+                        marriage_rate: 7.2,
+                        divorce: 4,
+                        unemployment: 4.1,
+                        avg_temp: 45.5,
+                        high_temp: 58.3,
+                        low_temp: 32.7,
+                        precipitation: 11.12,
+                        obesity: 9,
+                        gdp: 45846,
+                        gini: 0.435,
+                        age_of_consent: 16,
+                        median_age: 39.8,
+                        growth_rate: 3.45,
+                        urban: 55.90,
+                    }, "US-NE": {
+                        economy: 10,
+                        attractiveness: 5,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Nebraska",
+                        capital: "Lincoln",
+                        population: 1881503,
+                        sqmiles: 77354.00,
+                        marriage_rate: 7.5,
+                        divorce: 3.6,
+                        unemployment: 2.6,
+                        avg_temp: 50.65,
+                        high_temp: 61.5,
+                        low_temp: 39.8,
+                        precipitation: 30.25,
+                        obesity: 4,
+                        gdp: 115250,
+                        gini: 0.432,
+                        age_of_consent: 17,
+                        median_age: 36.2,
+                        growth_rate: 3.02,
+                        urban: 73.10,
+                    }, "US-NV": {
+                        economy: 1,
+                        attractiveness: 9,
+                        mobility: 5,
+                        laws: 5,
+                        family: 4,
+                        name: "Nevada",
+                        capital: "Carson City",
+                        population: 2839099,
+                        sqmiles: 110561.00,
+                        marriage_rate: 67.4,
+                        divorce: 7.1,
+                        unemployment: 7.1,
+                        avg_temp: 50.9,
+                        high_temp: 66,
+                        low_temp: 35.8,
+                        precipitation: 9.63,
+                        obesity: 7,
+                        gdp: 136903,
+                        gini: 0.448,
+                        age_of_consent: 16,
+                        median_age: 36.3,
+                        growth_rate: 5.13,
+                        urban: 94.20,
+                    }, "US-NH": {
+                        economy: 9,
+                        attractiveness: 8,
+                        mobility: 5,
+                        laws: 4,
+                        family: 5,
+                        name: "New Hampshire",
+                        capital: "Concord",
+                        population: 1326813,
+                        sqmiles: 9350.00,
+                        marriage_rate: 8.3,
+                        divorce: 4.3,
+                        unemployment: 3.9,
+                        avg_temp: 46.3,
+                        high_temp: 57.8,
+                        low_temp: 34.8,
+                        precipitation: 40.69,
+                        obesity: 8,
+                        gdp: 70118,
+                        gini: 0.425,
+                        age_of_consent: 16,
+                        median_age: 41.1,
+                        growth_rate: 0.79,
+                        urban: 60.30,
+                    }, "US-NJ": {
+                        economy: 2,
+                        attractiveness: 8,
+                        mobility: 10,
+                        laws: 5,
+                        family: 5,
+                        name: "New Jersey",
+                        capital: "Trenton",
+                        population: 8938175,
+                        sqmiles: 8721.00,
+                        marriage_rate: 6,
+                        divorce: 3.4,
+                        unemployment: 6.5,
+                        avg_temp: 54.9,
+                        high_temp: 63.3,
+                        low_temp: 46.5,
+                        precipitation: 46.01,
+                        obesity: 8,
+                        gdp: 560667,
+                        gini: 0.464,
+                        age_of_consent: 16,
+                        median_age: 39,
+                        growth_rate: 1.66,
+                        urban: 94.70,
+                    }, "US-NM": {
+                        economy: 3,
+                        attractiveness: 8,
+                        mobility: 5,
+                        laws: 3,
+                        family: 3,
+                        name: "New Mexico",
+                        capital: "Santa Fe",
+                        population: 2085572,
+                        sqmiles: 121589.00,
+                        marriage_rate: 7.9,
+                        divorce: 4.4,
+                        unemployment: 6.1,
+                        avg_temp: 49.9,
+                        high_temp: 65,
+                        low_temp: 34.8,
+                        precipitation: 14.21,
+                        obesity: 8,
+                        gdp: 95310,
+                        gini: 0.464,
+                        age_of_consent: 17,
+                        median_age: 36.7,
+                        growth_rate: 1.28,
+                        urban: 77.40,
+                    }, "US-NY": {
+                        economy: 4,
+                        attractiveness: 9,
+                        mobility: 10,
+                        laws: 5,
+                        family: 5,
+                        name: "New York",
+                        capital: "Albany",
+                        population: 19746227,
+                        sqmiles: 54556.00,
+                        marriage_rate: 7.3,
+                        divorce: 3.4,
+                        unemployment: 5.7,
+                        avg_temp: 55.15,
+                        high_temp: 62.3,
+                        low_temp: 48,
+                        precipitation: 46.23,
+                        obesity: 8,
+                        gdp: 1350286,
+                        gini: 0.499,
+                        age_of_consent: 17,
+                        median_age: 38,
+                        growth_rate: 1.9,
+                        urban: 87.90,
+                    }, "US-NC": {
+                        economy: 5,
+                        attractiveness: 6,
+                        mobility: 3,
+                        laws: 6,
+                        family: 7,
+                        name: "North Carolina",
+                        capital: "Raleigh",
+                        population: 9943964,
+                        sqmiles: 53819.00,
+                        marriage_rate: 7.7,
+                        divorce: 4.5,
+                        unemployment: 5.4,
+                        avg_temp: 59.8,
+                        high_temp: 70.8,
+                        low_temp: 48.8,
+                        precipitation: 41.63,
+                        obesity: 3,
+                        gdp: 491572,
+                        gini: 0.464,
+                        age_of_consent: 16,
+                        median_age: 37.4,
+                        growth_rate: 4.28,
+                        urban: 66.10,
+                    }, "US-ND": {
+                        economy: 10,
+                        attractiveness: 3,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "North Dakota",
+                        capital: "Bismarck",
+                        population: 739482,
+                        sqmiles: 70700.00,
+                        marriage_rate: 6.8,
+                        divorce: 3,
+                        unemployment: 3.1,
+                        avg_temp: 42.8,
+                        high_temp: 54.8,
+                        low_temp: 30.8,
+                        precipitation: 17.82,
+                        obesity: 4,
+                        gdp: 62772,
+                        gini: 0.433,
+                        age_of_consent: 18,
+                        median_age: 37,
+                        growth_rate: 9.95,
+                        urban: 59.90,
+                    }, "US-OH": {
+                        economy: 6,
+                        attractiveness: 4,
+                        mobility: 5,
+                        laws: 5,
+                        family: 4,
+                        name: "Ohio",
+                        capital: "Columbus",
+                        population: 11594163,
+                        sqmiles: 44825.00,
+                        marriage_rate: 7,
+                        divorce: 4,
+                        unemployment: 5.1,
+                        avg_temp: 52.9,
+                        high_temp: 62.5,
+                        low_temp: 43.3,
+                        precipitation: 56.11,
+                        obesity: 4,
+                        gdp: 584696,
+                        gini: 0.452,
+                        age_of_consent: 16,
+                        median_age: 38.8,
+                        growth_rate: 0.5,
+                        urban: 77.90,
+                    }, "US-OK": {
+                        economy: 9,
+                        attractiveness: 2,
+                        mobility: 1,
+                        laws: 4,
+                        family: 4,
+                        name: "Oklahoma",
+                        capital: "Oklahoma City",
+                        population: 3878051,
+                        sqmiles: 69898.00,
+                        marriage_rate: 6.6,
+                        divorce: 0,
+                        unemployment: 3.9,
+                        avg_temp: 61.5,
+                        high_temp: 72.2,
+                        low_temp: 50.8,
+                        precipitation: 36.46,
+                        obesity: 2,
+                        gdp: 192176,
+                        gini: 0.454,
+                        age_of_consent: 16,
+                        median_age: 36.2,
+                        growth_rate: 3.38,
+                        urban: 66.20,
+                    }, "US-OR": {
+                        economy: 5,
+                        attractiveness: 8,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "Oregon",
+                        capital: "Salem",
+                        population: 3970239,
+                        sqmiles: 98381.00,
+                        marriage_rate: 7.1,
+                        divorce: 4.6,
+                        unemployment: 5.4,
+                        avg_temp: 53,
+                        high_temp: 63.6,
+                        low_temp: 42.4,
+                        precipitation: 39.61,
+                        obesity: 7,
+                        gdp: 229241,
+                        gini: 0.449,
+                        age_of_consent: 18,
+                        median_age: 38.4,
+                        growth_rate: 3.63,
+                        urban: 81.00,
+                    }, "US-PA": {
+                        economy: 6,
+                        attractiveness: 4,
+                        mobility: 7,
+                        laws: 5,
+                        family: 4,
+                        name: "Pennsylvania",
+                        capital: "Harrisburg",
+                        population: 12787209,
+                        sqmiles: 46055.00,
+                        marriage_rate: 5.7,
+                        divorce: 3.1,
+                        unemployment: 5.3,
+                        avg_temp: 55.85,
+                        high_temp: 64.7,
+                        low_temp: 47,
+                        precipitation: 41.45,
+                        obesity: 5,
+                        gdp: 664872,
+                        gini: 0.461,
+                        age_of_consent: 16,
+                        median_age: 40.1,
+                        growth_rate: 0.67,
+                        urban: 78.70,
+                    }, "US-RI": {
+                        economy: 3,
+                        attractiveness: 7,
+                        mobility: 5,
+                        laws: 4,
+                        family: 4,
+                        name: "Rhode Island",
+                        capital: "Providence",
+                        population: 1055173,
+                        sqmiles: 1545.00,
+                        marriage_rate: 7.7,
+                        divorce: 3.2,
+                        unemployment: 6.3,
+                        avg_temp: 51.5,
+                        high_temp: 60.5,
+                        low_temp: 42.5,
+                        precipitation: 102.52,
+                        obesity: 9,
+                        gdp: 45962,
+                        gini: 0.467,
+                        age_of_consent: 16,
+                        median_age: 39.4,
+                        growth_rate: 0.25,
+                        urban: 90.70,
+                    }, "US-SC": {
+                        economy: 1,
+                        attractiveness: 3,
+                        mobility: 1,
+                        laws: 4,
+                        family: 4,
+                        name: "South Carolina",
+                        capital: "Columbia",
+                        population: 4832482,
+                        sqmiles: 32020.00,
+                        marriage_rate: 9.3,
+                        divorce: 3.4,
+                        unemployment: 6.7,
+                        avg_temp: 63.8,
+                        high_temp: 75.3,
+                        low_temp: 52.3,
+                        precipitation: 44.29,
+                        obesity: 1,
+                        gdp: 190176,
+                        gini: 0.461,
+                        age_of_consent: 16,
+                        median_age: 37.9,
+                        growth_rate: 4.48,
+                        urban: 66.30,
+                    }, "US-SD": {
+                        economy: 10,
+                        attractiveness: 5,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "South Dakota",
+                        capital: "Pierre",
+                        population: 853175,
+                        sqmiles: 77117.00,
+                        marriage_rate: 8.8,
+                        divorce: 3.3,
+                        unemployment: 3.5,
+                        avg_temp: 42.8,
+                        high_temp: 54.3,
+                        low_temp: 31.3,
+                        precipitation: 22.2,
+                        obesity: 4,
+                        gdp: 49142,
+                        gini: 0.442,
+                        age_of_consent: 16,
+                        median_age: 36.9,
+                        growth_rate: 4.79,
+                        urban: 56.70,
+                    }, "US-TN": {
+                        economy: 3,
+                        attractiveness: 1,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "Tennessee",
+                        capital: "Nashville",
+                        population: 6549352,
+                        sqmiles: 42143.00,
+                        marriage_rate: 13.1,
+                        divorce: 5.1,
+                        unemployment: 6.3,
+                        avg_temp: 63,
+                        high_temp: 72.4,
+                        low_temp: 53.6,
+                        precipitation: 53.67,
+                        obesity: 2,
+                        gdp: 296602,
+                        gini: 0.468,
+                        age_of_consent: 18,
+                        median_age: 38,
+                        growth_rate: 3.2,
+                        urban: 66.40,
+                    }, "US-TX": {
+                        economy: 8,
+                        attractiveness: 4,
+                        mobility: 3,
+                        laws: 4,
+                        family: 4,
+                        name: "Texas",
+                        capital: "Austin",
+                        population: 26956958,
+                        sqmiles: 268581.00,
+                        marriage_rate: 8.4,
+                        divorce: 3.9,
+                        unemployment: 4.2,
+                        avg_temp: 69.4,
+                        high_temp: 79.8,
+                        low_temp: 59,
+                        precipitation: 34.25,
+                        obesity: 3,
+                        gdp: 1602584,
+                        gini: 0.469,
+                        age_of_consent: 17,
+                        median_age: 33.6,
+                        growth_rate: 7.2,
+                        urban: 84.70,
+                    }, "US-UT": {
+                        economy: 10,
+                        attractiveness: 10,
+                        mobility: 7,
+                        laws: 4,
+                        family: 4,
+                        name: "Utah",
+                        capital: "Salt Lake City",
+                        population: 2942902,
+                        sqmiles: 84899.00,
+                        marriage_rate: 10.4,
+                        divorce: 4.1,
+                        unemployment: 3.4,
+                        avg_temp: 54.8,
+                        high_temp: 63.4,
+                        low_temp: 46.2,
+                        precipitation: 18.58,
+                        obesity: 10,
+                        gdp: 148017,
+                        gini: 0.419,
+                        age_of_consent: 18,
+                        median_age: 29.2,
+                        growth_rate: 6.48,
+                        urban: 90.60,
+                    }, "US-VT": {
+                        economy: 9,
+                        attractiveness: 9,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Vermont",
+                        capital: "Montpelier",
+                        population: 626562,
+                        sqmiles: 9614.00,
+                        marriage_rate: 9.7,
+                        divorce: 4.2,
+                        unemployment: 3.8,
+                        avg_temp: 45.85,
+                        high_temp: 55.2,
+                        low_temp: 36.5,
+                        precipitation: 36.79,
+                        obesity: 10,
+                        gdp: 30723,
+                        gini: 0.444,
+                        age_of_consent: 16,
+                        median_age: 41.5,
+                        growth_rate: 0.13,
+                        urban: 38.90,
+                    }, "US-VA": {
+                        economy: 7,
+                        attractiveness: 7,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "Virginia",
+                        capital: "Richmond",
+                        population: 8326289,
+                        sqmiles: 42774.00,
+                        marriage_rate: 8.6,
+                        divorce: 4.2,
+                        unemployment: 4.8,
+                        avg_temp: 58.75,
+                        high_temp: 69.5,
+                        low_temp: 48,
+                        precipitation: 43.32,
+                        obesity: 6,
+                        gdp: 464606,
+                        gini: 0.459,
+                        age_of_consent: 18,
+                        median_age: 37.5,
+                        growth_rate: 4.07,
+                        urban: 75.50,
+                    }, "US-WA": {
+                        economy: 3,
+                        attractiveness: 7,
+                        mobility: 5,
+                        laws: 5,
+                        family: 5,
+                        name: "Washington",
+                        capital: "Olympia",
+                        population: 7061530,
+                        sqmiles: 71300.00,
+                        marriage_rate: 6.5,
+                        divorce: 4.6,
+                        unemployment: 5.9,
+                        avg_temp: 52.65,
+                        high_temp: 60.3,
+                        low_temp: 45,
+                        precipitation: 37.13,
+                        obesity: 7,
+                        gdp: 425017,
+                        gini: 0.441,
+                        age_of_consent: 16,
+                        median_age: 37.3,
+                        growth_rate: 5.01,
+                        urban: 84.00,
+                    }, "US-WV": {
+                        economy: 1,
+                        attractiveness: 1,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "West Virginia",
+                        capital: "Charleston",
+                        population: 1850326,
+                        sqmiles: 24230.00,
+                        marriage_rate: 8.1,
+                        divorce: 5.2,
+                        unemployment: 6.6,
+                        avg_temp: 55.7,
+                        high_temp: 65.7,
+                        low_temp: 45.7,
+                        precipitation: 44.02,
+                        obesity: 1,
+                        gdp: 78050,
+                        gini: 0.451,
+                        age_of_consent: 16,
+                        median_age: 41.3,
+                        growth_rate: -0.14,
+                        urban: 48.70,
+                    }, "US-WI": {
+                        economy: 7,
+                        attractiveness: 5,
+                        mobility: 5,
+                        laws: 4,
+                        family: 4,
+                        name: "Wisconsin",
+                        capital: "Madison",
+                        population: 5757564,
+                        sqmiles: 65498.00,
+                        marriage_rate: 6.3,
+                        divorce: 3.2,
+                        unemployment: 4.6,
+                        avg_temp: 47.75,
+                        high_temp: 55.4,
+                        low_temp: 40.1,
+                        precipitation: 34.49,
+                        obesity: 5,
+                        gdp: 293126,
+                        gini: 0.43,
+                        age_of_consent: 18,
+                        median_age: 38.5,
+                        growth_rate: 1.24,
+                        urban: 70.20,
+                    }, "US-WY": {
+                        economy: 8,
+                        attractiveness: 7,
+                        mobility: 5,
+                        laws: 5,
+                        family: 6,
+                        name: "Wyoming",
+                        capital: "Cheyenne",
+                        population: 584153,
+                        sqmiles: 97814.00,
+                        marriage_rate: 9.5,
+                        divorce: 5.4,
+                        unemployment: 4.1,
+                        avg_temp: 46.4,
+                        high_temp: 58.5,
+                        low_temp: 34.3,
+                        precipitation: 15.66,
+                        obesity: 7,
+                        gdp: 48538,
+                        gini: 0.423,
+                        age_of_consent: 18,
+                        median_age: 36.8,
+                        growth_rate: 3.64,
+                        urban: 64.80,
+                    }
+                };
+            </script>
+
+            <div class="absolute-header" data-id="main-header" data-role="header"><h1><a href="#main-panel1"><img class="menu-america" src="america.png"></a>Switch States</h1></div>
+            <div id="main-panel1" data-display="overlay" data-role="panel">
+                <ul>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button" href="#page-settings">Settings</a></li>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button button-selected" href="#page-main">Main</a></li>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button" href="#page-about">About</a></li>
+                </ul>
+            </div>
+
+            <div class="content" data-role="content">
+                <div id="map">
+                </div>
+                <h3 id="state-selector" class="state-selector">Select a State</h3>
+                <div id="tooltip"></div>
+                <script>
+                    $(function() {
+                        var mapWidth = 100;
+
+                        function capitalizeFirstLetter(string) {
+                            return string.charAt(0).toUpperCase() + string.slice(1);
+                        }
+
+                        function combineArticle(code, cap) {
+                            if (typeof states[code].article !== "undefined") {
+                                if (cap === 1) {
+                                    var article = capitalizeFirstLetter(states[code].article);
+                                }
+                                else {
+                                    var article = states[code].article;
+                                }
+                                var state = article + " " + states[code].name;
+                            }
+                            else {
+                                var state = states[code].name;
+                            }
+                            return state;
+                        }
+
+                        function generateResponse(code, section) {
+                            var response;
+                            if (section === "family") {
+                                response = generateFamily(code);
+                            }
+                            else if (section === "health") {
+                                response = generateHealth(code);
+                            }
+                            else if (section === "economics") {
+                                response = generateEconomics(code);
+                            }
+                            else if (section === "demographics") {
+                                response = generateDemographics(code);
+                            }
+                            else if (section === "climate") {
+                                response = generateClimate(code);
+                            }
+                            else if (section === "dating") {
+                                response = generateDating(code);
+                            }
+                            return response;
+                        }
+
+                        function generateFamily(code) {
+                            var response = "";
+                            var state = combineArticle(code);
+                            if (typeof states[code].age_of_consent === "undefined") {
+                                var age_of_consent = "unknown";
+                            }
+                            else {
+                                var age_of_consent = states[code].age_of_consent + " years old";
+                            }
+                            if (states[code].family <= 4) {
+                                response += "<p>Family laws are weak in " + state + ". It is not advised to raise a family in this area.</p>";
+                            }
+                            else if (states[code].family > 4 && states[code].family < 8) {
+                                response += "<p>Family laws are moderate in " + state + ". It is probably an acceptable risk to raise a family here.</p>";
+                            }
+                            else if (states[code].family >= 8) {
+                                response += "<p>Family laws are strong in " + state + ". You have the best chance of raising a strong family in this area.</p>";
+                            }
+                            if (states[code].divorce !== 0) {
+                                response += "<p>The divorce rate is " + states[code].divorce + "%.</p>";
+                            }
+
+                            response += "<p>The age of consent is " + age_of_consent + ".</p>";
+
+                            if (typeof states[code].age_of_consent_state !== "undefined") {
+                                response += "<p>It is important to note that this state has different internal states which may impose additional rules on the age of majority and the age of consent.</p>";
+                            }
+
+                            response += "<p>This information can change at any time. It is <strong>important</strong> to do your own due diligence before traveling to another state and/or engaging in a romantic relationship.</p>";
+
+                            return response;
+                        }
+
+                        function generateEconomics(code) {
+                            var response = "";
+                            var currentCountry = localStorage.state;
+                            var state = combineArticle(code);
+                            var currentCountryName = combineArticle(currentCountry);
+                            var currentGDP = states[currentCountry].gdp / states[currentCountry].population;
+                            var newGDP = states[code].gdp / states[code].population;
+                            var currentPPD = states[currentCountry].ppd / states[currentCountry].population;
+                            var newPPD = states[code].ppd / states[code].population;
+                            if (!isNaN(currentGDP) && !isNaN(newGDP)) {
+                                if (newGDP === currentGDP || ((newGDP / currentGDP) > .85 && newGDP / currentGDP < 1.15) || ((currentGDP / newGDP) > .85 && currentGDP / newGDP < 1.15)) {
+                                    response += "<p>Imported goods will cost about exactly the same as they do at home.</p>";
+                                }
+                                else if (currentGDP < newGDP) {
+                                    response += "<p>You will be able to buy more imported goods than you currently can in " + currentCountryName + ".</p>";
+                                }
+                                else if (newGDP < (currentGDP / 10)) {
+                                    response += "<p>A normal citizen's salary would not let you purchase almost any imports.";
+                                    if (localStorage.savings >= 7) {
+                                        response += " However, this should not be a problem if you adequately invest your savings.";
+                                    }
+                                    else {
+                                        response += " You will need to find an outside source of income or find a lucrative local job to keep up your standard of living."
+                                    }
+                                    response += "</p>";
+                                }
+                                else if ((newGDP / 10) > currentGDP) {
+                                    response += "<p>Imported goods will be far cheaper for you to purchase with money earned in " + state + ".</p>";
+                                }
+                                else if (newGDP < currentGDP) {
+                                    response += "<p>The latest electronics, brand names, and other imported goods will probably cost more than they would at home.</p>";
+                                }
+
+                            }
+                            else {
+                                response += "<p>Economic data is missing for one or both of the states selected.</p>";
+                            }
+
+                            if (typeof states[code].unemployment !== "undefined" && states[code].unemployment !== 0) {
+                                response += "<p>The unemployment rate is " + states[code].unemployment + "%.</p>";
+                            }
+
+                            return response;
+                        }
+
+                        function generateHealth(code) {
+                            var state = combineArticle(code);
+                            var response = "";
+                            var health = states[code].malnourish + states[code].obesity;
+                            if (health < 5) {
+                                response = "<p>The general health of this area is very poor.</p>";
+                            }
+                            else if (health >= 5 && health < 10) {
+                                response = "<p>The general health of " + state + " is somewhat poor.</p>";
+                            }
+                            else if (health >= 10 && health < 15 && states[code].obesity >= 4 && states[code].malnourish >= 4) {
+                                response = "<p>The general health here is relatively good.</p>";
+                            }
+                            else if (health > 15 && states[code].obesity > 4 && states[code].malnourish > 4) {
+                                response = "<p>The general population in this area is very healthy.</p>";
+                            }
+                            if (states[code].malnourish < 4) {
+                                response += "<p>Malnourishment is common and the average citizen does not likely get adequate nutrition.</p>";
+                            }
+                            else if (states[code].malnourish > 8) {
+                                response += "<p>The population here has access to above average nutrition.</p>";
+                            }
+                            if (states[code].obesity < 4) {
+                                response += "<p>There is a severe obesity problem.</p>";
+                            }
+                            else if (states[code].obesity > 8 && states[code].malnourish > 4) {
+                                response += "<p>The population in " + state + " is fitter than average.</p>";
+                            }
+
+                            return response;
+                        }
+
+                        function generateDemographics(code) {
+                            var response = "";
+                            var age = Math.round(states[code].median_age);
+                            var state = combineArticle(code);
+                            var capCountry = combineArticle(code, 1);
+                            response += "<p>The median age in " + state + " is around " + age + " years old.</p>";
+                            if (states[code].growth_rate > 0) {
+                                response += "<p>The population is growing ";
+                                if (states[code].growth_rate >= 2.5) {
+                                    response += "very rapidly";
+                                }
+                                else if (states[code].growth_rate < 2.5 && states[code].growth_rate > 1) {
+                                    response += "somewhat quickly";
+                                }
+                                else if (states[code].growth_rate < 1) {
+                                    response += "slowly";
+                                }
+                                response += ".</p>";
+                            }
+                            else if (states[code].growth_rate < 0) {
+                                response += "<p>The population in this state is shrinking. This could be due to emigration, war, or people having less kids.</p>";
+                            }
+
+                            return response;
+                        }
+
+                        function generateClimate(code) {
+                            var response = "";
+                            var state = combineArticle(code);
+                            var capCountry = combineArticle(code, 1);
+                            if (states[code].precipitation >= 59) {
+                                var precipitation = " and very wet";
+                            }
+                            else if (states[code].precipitation > 35.43 && states[code].precipitation < 59.06) {
+                                var precipitation = " and wet";
+                            }
+                            else if (states[code].precipitation < 7.87) {
+                                var precipitation = " and very arid"
+                            }
+                            else if (states[code].precipitation < 19.69 && states[code].precipitation > 7.87) {
+                                var precipitation = " and dry";
+                            }
+                            else if (states[code].avg_temp >= 10 && states[code].avg_temp < 20.5) {
+                                var precipitation = " and mild";
+                            }
+                            else {
+                                var precipitation = "";
+                            }
+                            if (states[code].avg_temp <= 41) {
+                                response += "<p>" + capCountry + " is extremely cold" + precipitation + ".</p>";
+                            }
+                            else if (states[code].avg_temp < 50 && states[code].avg_temp > 41) {
+                                response += "<p>" + capCountry + " is usually cold" + precipitation + ".</p>";
+                            }
+                            else if (states[code].avg_temp >= 68.9) {
+                                response += "<p>" + capCountry + " is extremely warm" + precipitation + ".</p>";
+                            }
+                            else if (states[code].avg_temp >= 59.9 && states[code].avg_temp < 68.9) {
+                                response += "<p>" + capCountry + " has a warm" + precipitation + " climate.</p>";
+                            }
+                            else if (states[code].avg_temp >= 50 && states[code].avg_temp < 59.9) {
+                                response += "<p>" + capCountry + " has a cool" + precipitation + " climate.</p>";
+                            }
+                            if ((states[code].avg_temp - states[code].low_temp >= 42.8) && (states[code].high_temp - states[code].avg_temp >= 42.8)) {
+                                response += "<p>There are strong seasonal temperature swings here.</p>";
+                            }
+                            else if ((states[code].avg_temp - states[code].low_temp) >= 42.8) {
+                                response += "<p>There is a large temperature swing during the winter. It will be far colder than normal</p>";
+                            }
+                            else if ((states[code].high_temp - states[code].avg_temp) >= 42.8) {
+                                response += "<p>There is a large temperature swing during the summer. It will be far warmer than normal</p>";
+                            }
+                            if (states[code].sqmiles > 1000000) {
+                                response += "<p>This state is very large, and significant parts of " + state + " likely do not fit the climate averages.</p>";
+                            }
+                            return response;
+                        }
+
+                        map = new jvm.Map({
+                            map: 'us_lcc_en',
+                            container: $('#map'),
+                            regionsSelectable: true,
+                            regionsSelectableOne: true,
+                            onRegionTipShow: function(e, tip, code) {
+                                //console.log(code);
+                                //console.log(tip);
+                                //console.log(states[code]);
+                                tip.html("<div>" + tip.text() + "</div><div>Unemployment: " + states[code].unemployment + "%</div><div>Capital: " + states[code].capital);
+                            },
+                            onRegionClick: function(e, code) {
+                                $("#state-selector").text(states[code].name);
+                                $("#tooltip").hide();
+                                $("#tooltip").empty();
+                                $("#tooltip").append('<div data-role="collapsible" id="state-history"><h3>State History (Wikipedia)</h3>');
+                                if (mapWidth === 100) {
+                                    if (typeof states[code].link !== "undefined") {
+                                        var link = states[code].link;
+                                    }
+                                    else {
+                                        var name = states[code].name.replace(" ", "_");
+                                        var link = "http://en.wikipedia.org/wiki/" + name;
+                                    }
+                                    $.get(link, function(response) {
+                                        var elements = $.parseHTML(response);
+                                        var wiki = $(elements).find('#mw-content-text').find("p");
+                                        var flag = $(elements).find('#mw-content-text').find(".infobox").find("td").first().find("td").first().find("img").attr("src");
+                                        flag = flag.replace("//", "");
+                                        $("#state-selector").append("<img id='flag-link' src='http://" + flag + "'>");
+                                        var arrayLength = wiki.length;
+                                        for (var i = 0; i < arrayLength; i++) {
+                                            if (wiki[i].innerHTML === "") {
+                                                break;
+                                            }
+                                            var item = wiki[i];
+                                            $(item).find("a").contents().unwrap();
+                                            $(item).find(".nowrap").remove();
+                                            $(item).find(".reference").remove();
+                                            $(item).find("#coordinates").remove();
+                                            $(item).filter("[style]").remove();
+                                            $("#state-history").append(item.outerHTML);
+                                        }
+                                        $("#tooltip").append('<div data-role="collapsible" id="family"><h3>Family/Dating</h3>' + generateResponse(code, "family") + '</div>');
+                                        $("#tooltip").append('<div data-role="collapsible" id="health"><h3>Health</h3>' + generateResponse(code, "health") + '</div>');
+                                        $("#tooltip").append('<div data-role="collapsible" id="economics"><h3>Economics</h3>' + generateResponse(code, "economics") + '</div>');
+                                        $("#tooltip").append('<div data-role="collapsible" id="demographics"><h3>Demographics</h3>' + generateResponse(code, "demographics") + '</div>');
+                                        $("#tooltip").append('<div data-role="collapsible" id="climate"><h3>Climate</h3>' + generateResponse(code, "climate") + '</div>');
+                                        $('#state-history').collapsible().trigger('create');
+                                        $('#family').collapsible().trigger('create');
+                                        $('#demographics').collapsible().trigger('create');
+                                        $('#climate').collapsible().trigger('create');
+                                        $('#health').collapsible().trigger('create');
+                                        $('#economics').collapsible().trigger('create');
+                                        $("#tooltip").show();
+                                    });
+                                    //$("#map").animate({"width": "70%"}, 500)
+                                    //mapWidth = 75;
+                                }
+                                else if (mapWidth === 75) {
+                                    $("#tooltip").empty();
+                                    //$("#map").animate({"width": "100%"}, 500)
+                                    //mapWidth = 100;
+                                }
+                            },
+                            regionStyle: {
+                                selected: {
+                                    "fill-opacity": 0.5,
+                                    fill: null
+                                }
+                            },
+                            backgroundColor: "#B4CDCD",
+                            series: {
+                                regions: [{
+                                        attribute: 'fill'
+                                    }]
+                            }
+                        });
+                        map.series.regions[0].setValues(generateColors());
+                    });
+                                
+                                     generateColors = function() {
+                            var colors = {},
+                                    key;
+                            localStorage.setItem("unemployment", 1);
+                            localStorage.setItem("laws", 1);
+                            localStorage.setItem("attractiveness", 1);
+                            localStorage.setItem("mobility", 1);
+                            localStorage.setItem("obesity", 1);
+                            localStorage.setItem("malnourished", 1);
+                            var state_vals = [];
+                            for (key in map.regions) {
+
+                                var unemployment_multi = (states[key].unemployment * localStorage.unemployment) / 5; // NOT RIGHT DO MORE COMPLEX CALC
+                                var laws_multi = states[key].laws * localStorage.laws;
+                                var malnourished_multi = states[key].malnourished * localStorage.malnourished;
+                                var obesity_multi = states[key].obesity * localStorage.obesity;
+                                if (isNaN(malnourished_multi)) {
+                                    malnourished_multi = 1;
+                                }
+
+
+                                var attractiveness_multi = (obesity_multi + malnourished_multi) / 2;
+                                var family_multi = states[key].family * localStorage.family;
+                                var mobility_multi = states[key].mobility * localStorage.mobility;
+                                laws_multi = 1;
+                                family_multi = 1;
+                                mobility_multi = 1;
+//console.log(unemployment_multi);
+//console.log(laws_multi);
+//console.log(attractiveness_multi);
+//console.log(family_multi);
+//console.log(mobility_multi);
+                                var total_val = (unemployment_multi + laws_multi + attractiveness_multi + family_multi + mobility_multi) / 5;
+                                var obj = {};
+                                obj[total_val] = key;
+                                state_vals.push(obj);
+                                //console.log(total_val);
+                                //console.log(states[key].economy);
+                            }
+                            state_vals.sort(function(a, b) {
+                                var first = Object.keys(a)[0];
+                                var second = Object.keys(b)[0];
+                                return first - second;
+                            });
+                            var i = 0;
+                            for (key in state_vals) {
+                                var numeric_val = Object.keys(state_vals[i]);
+                                var state_key = state_vals[i][numeric_val];
+                                var third = state_vals.length / 3;
+                                if (i <= third) {
+                                    colors[state_key] = colorMake("first", localStorage.scheme);
+                                }
+                                else if (i > third && i <= third + third) {
+                                    colors[state_key] = colorMake("second", localStorage.scheme);
+                                }
+                                else if (i > third + third) {
+                                    colors[state_key] = colorMake("third", localStorage.scheme);
+                                }
+                                i++;
+                            }
+                            //console.log("state vals");
+                            //console.log(state_vals);
+                            return colors;
+                        };
+                
+                
+                        function colorMake(position, scheme) {
+                            if (position === "first") {
+                                if (scheme === "usa") {
+                                    return "#E04006";
+                                }
+                                else if (scheme === "normal") {
+                                    return "#ba0707";
+                                }
+                            }
+                            else if (position === "second") {
+                                if (scheme === "usa") {
+                                    return "#FFF";
+                                }
+                                else if (scheme === "normal") {
+                                    return "#d2d207";
+                                }
+                            }
+                            else if (position === "third") {
+                                if (scheme === "usa") {
+                                    return "#0276FD";
+                                }
+                                else if (scheme === "normal") {
+                                    return "#2eb02e";
+                                }
+                            }
+                        }
+                
+                
+                
+                </script>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="page-about">
+            <div class="absolute-header" data-id="main-header" data-role="header"><h1><a href="#main-panel2"><img class="menu-america" src="america.png"></a>Switch States</h1></div>
+            <div id="main-panel2" data-display="overlay" data-role="panel">
+                <ul>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button" href="#page-settings">Settings</a></li>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button" href="#page-main">Main</a></li>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button button-selected" href="#page-about">About</a></li>
+                </ul>
+            </div>
+            <div data-role="content" class="center-content content">
+                Switch States
+                Version .5 Alpha
+                <div id="credit"><strong>Credit to:</strong></div>
+                <p class="credit">jVectorMap</p>
+                <p class="credit">Weatherbase.com</p>
+                <p class="credit">CIA World Factbook</p>
+                <p class="credit">Wikipedia</p>
+                <p class="credit">worldatlas.com</p>
+            </div>
+        </div>
+
+        <div data-role="page" id="page-resources">
+            <div class="absolute-header" data-id="main-header" data-role="header"><h1><a href="#main-panel4"><img class="menu-america" src="america.png"></a>Switch States</h1></div>
+            <div data-role="main" class="content">
+                <h3 class="center-h3">Quality Resources</h3>
+                <div class="border">
+                    <div class="reddit-toprow">
+                        <div class="reddit-row">
+                            <a href=""></a><br />
+                        </div></div></div>
+                <div class="border">
+                    <div class="reddit-toprow">
+                        <div class="reddit-row">
+                            <a href=""></a><br />
+                        </div></div></div>
+                <div class="border">
+                    <div class="reddit-toprow">
+                        <div class="reddit-row">
+                            <a href=""></a><br />
+                        </div></div></div>
+                <div class="border">
+                    <div class="reddit-toprow">
+                        <div class="reddit-row">
+                            <a href=''></a><br />
+                        </div></div></div>
+                <div class="border">
+                    <div class="reddit-toprow">
+                        <div class="reddit-row">
+                            <a href=""></a><br />
+                        </div></div></div>
+                <div class="border">
+                    <div class="reddit-toprow">
+                        <div class="reddit-row">
+                            <a href=""></a><br />
+                        </div></div></div>
+
+            </div>
+        </div>
+        <div data-role="page" id="page-settings">
+            <div class="absolute-header" data-id="main-header" data-role="header"><h1><a href="#main-panel3"><img class="menu-america" src="america.png"></a>Switch States</h1></div>
+            <div id="main-panel3" data-display="overlay" data-role="panel">
+                <ul>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button button-selected" href="#page-settings">Settings</a></li>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button" href="#page-main">Main</a></li>
+                    <li class="sidebar-li"><a data-enhance="false" class="sidebar-button" href="#page-about">About</a></li>
+                </ul>
+            </div>
+
+            <script>
+                $(function() {
+                    mapsettings = new jvm.Map({
+                        map: 'us_lcc_en',
+                        container: $('#settings-map'),
+                        regionsSelectable: true,
+                        regionsSelectableOne: true,
+                        onRegionClick: function(e, code) {
+                            $("#settings-state-selector").text(states[code].name);
+                            localStorage.state = code;
+                        },
+                        regionStyle: {
+                            selected: {
+                                fill: "black"
+                            }
+                        },
+                        backgroundColor: "#B4CDCD",
+                    });
+                    if (typeof localStorage.state !== "undefined") {
+                        mapsettings.setSelectedRegions(localStorage.state);
+                        $("#settings-state-selector").text(states[localStorage.state].name);
+                    }
+
+                });</script>
+            <script>
+                var sliderArrays = [
+                    {
+                        id: "family-selector",
+                        key: "family"
+                    },
+                    {
+                        id: "savings-selector",
+                        key: "savings"
+                    },
+                    {
+                        id: "import-selector",
+                        key: "import"
+                    },
+                    {
+                        id: "local-selector",
+                        key: "local"
+                    }
+                ];
+                sliderArrays.forEach(function(item) {
+                    var selector = "#" + item.id;
+                    $("#page-settings").on('change', selector, function(event) {
+                        localStorage.setItem(item.key, $(selector).val());
+                    });
+                });
+                var buttons = [
+                    {
+                        id: "remote",
+                        number: 2
+                    },
+                    {
+                        id: "children",
+                        number: 2
+                    },
+                    {
+                        id: "scheme",
+                        number: 2
+                    }
+                ];
+                $("#page-settings").on("change", "#remote-1", function(event) {
+                    localStorage.setItem("remote", 1);
+                });
+                $("#page-settings").on("change", "#remote-2", function(event) {
+                    localStorage.setItem("remote", 2);
+                });
+                $("#page-settings").on("change", "#children-1", function(event) {
+                    localStorage.setItem("children", 1);
+                });
+                $("#page-settings").on("change", "#children-2", function(event) {
+                    localStorage.setItem("children", 2);
+                });
+
+                $("#page-settings").on("change", "#scheme-1", function(event) {
+                    localStorage.setItem("scheme", "usa");
+                });
+
+                $("#page-settings").on("change", "#scheme-2", function(event) {
+                    localStorage.setItem("scheme", "normal");
+                });
+// Custom sliders
+                $("#page-settings").on('change', "#temp-slider", function(event) {
+
+                    switch ($("#temp-slider").val()) {
+                        case "1":
+                            $("#temp-desc").text("Very Cold");
+                            localStorage.setItem("temperature", 1);
+                            break;
+                        case "2":
+                            $("#temp-desc").text("Cold");
+                            localStorage.setItem("temperature", 2);
+                            break;
+                        case "3":
+                            $("#temp-desc").text("Mildly Cold");
+                            localStorage.setItem("temperature", 3);
+                            break;
+                        case "4":
+                            $("#temp-desc").text("Average");
+                            localStorage.setItem("temperature", 4);
+                            break;
+                        case "5":
+                            $("#temp-desc").text("Mildly Warm");
+                            localStorage.setItem("temperature", 5);
+                            break;
+                        case "6":
+                            $("#temp-desc").text("Warm");
+                            localStorage.setItem("temperature", 6);
+                            break;
+                        case "7":
+                            $("#temp-desc").text("Very Warm");
+                            localStorage.setItem("temperature", 7);
+                            break;
+                    }
+
+                });
+                $("#page-settings").on('change', "#urban-slider", function(event) {
+
+                    switch ($("#urban-slider").val()) {
+                        case "1":
+                            $("#urban-desc").text("Very Rural");
+                            localStorage.setItem("urban", 1);
+                            break;
+                        case "2":
+                            $("#urban-desc").text("Rural");
+                            localStorage.setItem("urban", 2);
+                            break;
+                        case "3":
+                            $("#urban-desc").text("Mildly Rural");
+                            localStorage.setItem("urban", 3);
+                            break;
+                        case "4":
+                            $("#urban-desc").text("About Half Urban and Rural");
+                            localStorage.setItem("urban", 4);
+                            break;
+                        case "5":
+                            $("#urban-desc").text("Mildly Urban");
+                            localStorage.setItem("urban", 5);
+                            break;
+                        case "6":
+                            $("#urban-desc").text("Urban");
+                            localStorage.setItem("urban", 6);
+                            break;
+                        case "7":
+                            $("#urban-desc").text("Very Urban");
+                            localStorage.setItem("urban", 7);
+                            break;
+                    }
+
+                });</script>
+
+
+            <div class="content" data-role="content">
+                <h2 id="settings-top">Answer all questions</h2>
+                <h3 id="state-what">What state are you in?</h3>
+
+                <div id="settings-map"></div>
+
+                <h3 id="settings-state-selector" class="state-selector"></h3>
+
+
+                <h4 class="center-h4">A strong family is important to me</h4>
+                <input type="range" step="1" name="family" id="family-selector" value="0" min="0" max="10" data-highlight="true" />
+
+
+                <h4 class="center-h4">I have a large amount in savings</h4>
+                <input step="1" type="range" name="savings" id="savings-selector" value="0" min="0" max="10" data-highlight="true" />
+
+
+                <h4 class="center-h4">Owning the latest electronics and import goods is important to me</h4>
+                <input type="range" step="1" name="import" id="import-selector" value="0" min="0" max="10" data-highlight="true" />
+
+                <h4 class="center-h4">I will purchase a lot of local services (restaurants, bars, mechanics)</h4>
+                <input type="range" step="1" name="local" id="local-selector" value="0" min="0" max="10" data-highlight="true" />
+
+                <h4 class="center-h4">I can do my work remotely</h4>
+                <fieldset data-role="controlgroup" id="remote" data-mini="true">
+                    <input type="radio" name="remote" id="remote-1" value="no" />
+                    <label for="remote-1">No</label>
+
+                    <input type="radio" name="remote" id="remote-2" value="yes"  />
+                    <label for="remote-2">Yes</label>
+
+                </fieldset>
+
+                <h4 class="center-h4">I (want to) have children</h4>
+                <fieldset data-role="controlgroup" id="children" data-mini="true">
+                    <input type="radio" name="children" id="children-1" value="no" />
+                    <label for="children-1">No</label>
+
+                    <input type="radio" name="children" id="children-2" value="yes"  />
+                    <label for="children-2">Yes</label>
+
+                </fieldset>
+
+                <h4 class="center-h4">I prefer urban over rural areas</h4>
+                <input type="range" name="urban" id="urban-slider" value="1" step="1" min="1" max="7" data-highlight="true" />
+                <div id="urban-desc"></div>
+
+                <h4 class="center-h4">I prefer a state with a certain temperature</h4>
+                <input type="range" name="temperature" id="temp-slider" value="1" step="1" min="1" max="7" data-highlight="true" />
+                <div id="temp-desc"></div>
+
+                <h4 class="center-h4">What color scheme do you want?</h4>
+                <fieldset data-role="controlgroup" id="scheme" data-mini="true">
+                    <input type="radio" name="scheme" id="scheme-1" checked="checked" />
+                    <label for="scheme-1">USA</label>
+
+                    <input type="radio" name="scheme" id="scheme-2" />
+                    <label for="scheme-2">Normal</label>
+
+                </fieldset>
+
+                <script>
+                    // Initialization settings
+                    (function() {
+                        switch (localStorage.temperature) {
+                            case "1":
+                                $("#temp-desc").text("Very Cold");
+                                $("#temp-slider").attr("value", 1);
+                                break;
+                            case "2":
+                                $("#temp-desc").text("Cold");
+                                $("#temp-slider").attr("value", 2);
+                                break;
+                            case "3":
+                                $("#temp-desc").text("Mildly Cold");
+                                $("#temp-slider").attr("value", 3);
+                                break;
+                            case "4":
+                                $("#temp-desc").text("Average");
+                                $("#temp-slider").attr("value", 4);
+                                break;
+                            case "5":
+                                $("#temp-desc").text("Mildly Warm");
+                                $("#temp-slider").attr("value", 5);
+                                break;
+                            case "6":
+                                $("#temp-desc").text("Warm");
+                                $("#temp-slider").attr("value", 6);
+                                break;
+                            case "7":
+                                $("#temp-desc").text("Very Warm");
+                                $("#temp-slider").attr("value", 7);
+                                break;
+                            default:
+                                $("#temp-desc").text("Very Cold");
+                                $("#temp-slider").attr("value", 1);
+                                break;
+                        }
+                    })();
+                    (function() {
+                        switch (localStorage.urban) {
+                            case "1":
+                                $("#urban-desc").text("Very Rural");
+                                $("#urban-slider").attr("value", 1);
+                                break;
+                            case "2":
+                                $("#urban-desc").text("Rural");
+                                $("#urban-slider").attr("value", 2);
+                                break;
+                            case "3":
+                                $("#urban-desc").text("Mildly Rural");
+                                $("#urban-slider").attr("value", 3);
+                                break;
+                            case "4":
+                                $("#urban-desc").text("About Half Urban and Rural");
+                                $("#urban-slider").attr("value", 4);
+                                break;
+                            case "5":
+                                $("#urban-desc").text("Mildly Urban");
+                                $("#urban-slider").attr("value", 5);
+                                break;
+                            case "6":
+                                $("#urban-desc").text("Urban");
+                                $("#urban-slider").attr("value", 6);
+                                break;
+                            case "7":
+                                $("#urban-desc").text("Very Urban");
+                                $("#urban-slider").attr("value", 7);
+                                break;
+                            default:
+                                $("#urban-desc").text("Very Rural");
+                                $("#urban-slider").attr("value", 1);
+                        }
+                    })();
+                    (function() {
+                        var sliderArrays = [
+                            {
+                                id: "family-selector",
+                                key: "family"
+                            },
+                            {
+                                id: "savings-selector",
+                                key: "savings"
+                            },
+                            {
+                                id: "import-selector",
+                                key: "import"
+                            },
+                            {
+                                id: "local-selector",
+                                key: "local"
+                            }
+                        ];
+                        sliderArrays.forEach(function(item) {
+                            var selector = "#" + item.id;
+                            if (typeof localStorage[item.key] !== "undefined") {
+                                $(selector).attr("value", localStorage[item.key]);
+                            }
+                            else {
+                                $(selector).attr("value", 0);
+                            }
+                        });
+                    })();
+                    (function() {
+                        if (localStorage.remote === "1") {
+                            $("#remote-1").attr("checked", true);
+                        }
+                        else if (localStorage.remote === "2") {
+                            $("#remote-2").attr("checked", true);
+                        }
+
+                        if (localStorage.children === "1") {
+                            $("#children-1").attr("checked", true);
+                        }
+                        else if (localStorage.children === "2") {
+                            $("#children-2").attr("checked", true);
+                        }
+
+                        if (localStorage.scheme === "usa") {
+                            $("#scheme-1").attr("checked", true);
+                        }
+                        else if (localStorage.scheme === "normal") {
+                            $("#scheme-2").attr("checked", true);
+                        }
+
+                    })();
+                </script>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Converter</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="js/jquery-1.11.2/jquery-1.11.2.min.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="page-main">
+            <script>
+                var link = "http://www.usclimatedata.com/";
+                $.get(link, function(response) {
+                    var nohover = $(response).find('.right_column').find("a");
+                    console.log(nohover);
+                    var total = "state,avg_temp,high_temp,low_temp,precipitation\n";
+                    var processed;
+                    for (var i = 0, processed = 0, len = nohover.length; i < len; i++) {
+                        //console.log(nohover[i]);
+                        var newLink = nohover[i].getAttribute("href");
+                        //console.log(newLink);
+                        newLink = "http://www.usclimatedata.com/" + newLink;
+
+                        $.get(newLink, function(response2) {
+                            var stateName = $($(response2).find(".menu_whole_width").children()[2]).text();
+                            console.log(stateName);
+
+                            stateName = stateName.toLowerCase();
+
+                            //console.log($(response2).find("tbody:eq(2)").children());
+                            var avgTemp = $(response2).find("tbody:eq(2)").children()[2];
+                            var highTemp = $(response2).find("tbody:eq(2)").children()[0];
+                            var lowTemp = $(response2).find("tbody:eq(2)").children()[1];
+                            var precip = $(response2).find("tbody:eq(2)").children()[3];
+                            
+                            avgTemp = $(avgTemp).children()[1].innerHTML;
+                            highTemp = $(highTemp).children()[1].innerHTML;
+                            lowTemp = $(lowTemp).children()[1].innerHTML;
+                            precip = $(precip).children()[1].innerHTML;
+                            precip = precip.substring(0, precip.indexOf(" inch"));
+                            avgTemp = avgTemp.substring(0, avgTemp.indexOf("°"));
+                            lowTemp = lowTemp.substring(0, lowTemp.indexOf("°"));
+                            highTemp = highTemp.substring(0, highTemp.indexOf("°"));
+                            
+                            total += stateName + "," + avgTemp + "," + highTemp + "," + lowTemp + "," + precip + "\n";
+                            processed++;
+                            console.log(processed);
+                            if (processed === 51) {
+                                console.log(total);
+                                var csvContent = "data:text/csv;charset=utf-8,";
+                                csvContent += total;
+                                var encodedUri = encodeURI(csvContent);
+                                window.open(encodedUri);
+                            }
+                        });
+                    }
+
+
+                });
+            </script>
+        </div>
+    </body>
+</html>

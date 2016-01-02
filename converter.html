@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Converter</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="js/jquery-1.11.2/jquery-1.11.2.min.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="page-main">
+            <h3>Insert Javascript Here</h3>
+            <textarea style="width:200px;height:300px" id="javascript"></textarea>
+            <div>
+                <button id="csvbutton">Convert to CSV
+                </button>
+            </div>
+            <h3>Insert CSV Here</h3>
+            <textarea style="width:200px;height:300px" id="csv"></textarea>
+            <div>
+                <button id="javascriptbutton">Convert to Javascript
+                </button>
+            </div>
+            <script>
+                $("#csvbutton").click(function() {
+                    var data = $("#javascript").val();
+                    var split_string = data.split("},");
+                    //console.log(split_string);
+                    var item_array = [];
+                    var csv_array = [];
+                    item_array.push("country");
+                    split_string.forEach(function(item, item2) {
+                        var key = item.slice(0, item.indexOf('": {'));
+                        key = key.replace('"', '');
+                        key = key.trim();
+                        item = item.substr(item.indexOf('": {') + 5);
+                        item = item.trim();
+                        item = item.replace("\r", "");
+                        item = item.replace("\n", "");
+                        item = item.replace("}", "");
+                        var column = item.split(",");
+                        column.forEach(function(column1) {
+                            var header = column1.substr(0, column1.indexOf(':'));
+                            header = header.trim();
+                            var header_response = item_array.indexOf(header);
+                            if (header_response === -1) {
+                                if (header !== "") {
+                                    item_array.push(header);
+                                }
+                            }
+                        });
+                    });
+
+                    split_string.forEach(function(item, item2) {
+                        var csv_row_array = [];
+                        var key = item.slice(0, item.indexOf('": {'));
+                        key = key.replace('"', '');
+                        key = key.trim();
+                        item = item.substr(item.indexOf('": {') + 5);
+                        item = item.trim();
+                        item = item.replace("\r", "");
+                        item = item.replace("\n", "");
+                        item = item.replace("}", "");
+                        var column = item.split(",");
+                        csv_row_array.push(key);
+                        for (var i = 0; i < item_array.length; i++) {
+                            csv_row_array.push("");
+                        }
+                        column.forEach(function(column1) {
+                            var header = column1.substr(0, column1.indexOf(':'));
+                            header = header.trim();
+                            var body = column1.substr(column1.indexOf(":") + 1);
+                            body = body.replace("\r", "");
+                            body = body.replace("\n", "");
+                            body = body.replace(/'/g, "");
+                            body = body.trim();
+                            csv_row_array.splice(item_array.indexOf(header), 1, body);
+                        });
+                        csv_array.push(csv_row_array);
+                    });
+                    csv_array.splice(0, 0, item_array);
+                    var csvContent = "data:text/csv;charset=utf-8,";
+                    csv_array.forEach(function(infoArray, index) {
+
+                        var dataString = infoArray.join(",");
+                        csvContent += index < data.length ? dataString + "\n" : dataString;
+
+                    });
+
+                    var encodedUri = encodeURI(csvContent);
+                    window.open(encodedUri);
+                });
+
+
+                $("#javascriptbutton").click(function() {
+                    var data = $("#csv").val();
+
+                    var data_array = data.split("\n");
+                    //console.log(data_array);
+
+
+                    var header = data_array.splice(0, 1);
+                    header = header.join("");
+                    var header_row = header.split(",");
+                    header_row.splice(0, 1);
+                    //console.log(header_row);
+
+                    var total_values = "";
+
+
+                    data_array.forEach(function(row, index) {
+                        var values = "";
+                        var item = row.split(",");
+                        var country = item.splice(0, 1);
+                        //console.log(country);
+                        //console.log(item);
+
+                        for (i = 0; i < item.length; i++) {
+
+                            if (typeof header_row[i] !== "undefined" && typeof item[i] !== "undefined" && item[i] !== "") {
+                                //console.log(header_row[i]);
+                                //console.log(item[i]);
+                                if (isNaN(item[i])) {
+                                    if (typeof item[i] === "boolean" || item[i] === "TRUE" || item[i] === "FALSE" || (item[i].indexOf('"') > -1)) {
+
+                                    }
+                                    else {
+                                        item[i] = '"' + item[i] + '"';
+                                    }
+                                }
+                                values += header_row[i] + ': ' + item[i] + ",\n";
+                            }
+
+
+                        }
+                        //console.log(values);
+                        if (typeof values !== "undefined") {
+                            total_values += '"' + country + '": {\n' + values + "}, ";
+                        }
+
+
+                    });
+                    console.log(total_values);
+                    var textContent = "data:Application/octet-stream;charset=utf-8,";
+                    textContent += total_values;
+                    //console.log(textContent);
+                    var encodedUri = encodeURI(textContent);
+                    window.open(encodedUri);
+                });
+
+
+
+
+            </script>
+        </div>
+    </body>
+</html>
